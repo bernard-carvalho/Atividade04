@@ -16,6 +16,14 @@ public class ItemVenda implements Serializable {
     @JoinColumn(name="produto_id")
     private Produto produto;
 
+    public Long getId(){
+        return id;
+    }
+
+    public void setId(Long id){
+        this.id=id;
+    }
+
     public Produto getProduto() {
         return produto;
     }

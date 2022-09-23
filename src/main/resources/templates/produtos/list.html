@@ -9,9 +9,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+    <script>
+        function excluir(id){
+            let url="delete/"+id;
+            //alert(url);
+            window.location.href = url;
+        }
+    </script>
+
     <body>
-        <a href="/home"><h1>home</h1><a/>
-    <a href="/vendas/list"><h1>Vendas</h1><a/>
+    <a href="/home"><h1>HOME</h1></a>
+    <a href="/produtos/list"><h1>PRODUTOS</h1></a>
+    <a href="/vendas/list"><h1>VENDAS</h1></a>
+    <a href="/vendas/carrinho/"><h1><p th:text="${'CARRINHO ['+session.venda.getItensVenda.size}+']'"> a</p></h1></a>
         <div>PRODUTOS</div>
         <table class="table" border="1">
             <thead>
@@ -22,21 +32,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <th colspan="2">Ações</th>
             </tr>
             </thead>
-            <tr th:each="produto : ${produtos}">
-                <td><input type="text" th:value="${produto.getId()}" disabled></td>
-                <td><input type="text" th:value="${produto.getDescricao()}" disabled></td>
-                <td><input type="text" th:value="${produto.getValor()}" disabled></td>
-                <td>alterar</td>
-                <td>salvar</td>
-            </tr>
-            <tr>
-                <form action="/produtos/add" method="get">
-                    <td><input type="number" name="id" disabled></td>
-                    <td><input type="text" name="descricao"></td>
-                    <td><input type="number" name="valor"></td>
-                    <td colspan="2"><input type="submit" value="Adicionar"></td>
-                </form>
-            </tr>
+            <tbody>
+                
+                <tr th:each="produto : ${produtos}">
+                    <form action="/produtos/update" method="GET" th:url="${produto.getId()}" >
+                        <td><input type="text" name="id" th:value="${produto.getId()}" readonly></td>
+                        <td><input type="text" name="descricao" th:value="${produto.getDescricao()}"></td>
+                        <td><input type="text" name="valor" th:value="${produto.getValor()}"></td>
+                        <td><input type="submit" value="Alterar"></td>                     
+                        <td><input type="button" value="Deletar" th:onclick="'excluir('+${produto.getId()}+')'"></td> 
+                    </form>    
+                </tr>
+
+                <tr>
+                    <form action="/produtos/create" method="CREATE">
+                        <td><input type="number" name="id" disabled></td>
+                        <td><input type="text" name="descricao"></td>
+                        <td><input type="number" name="valor"></td>
+                        <td colspan="2"><input type="submit" value="Adicionar"></td>
+                    </form>
+                </tr>
+            </tbody>
         </table>
     </body>
 </html>

@@ -2,6 +2,8 @@ package pgw2.Atividade04.Entity;
 
 import java.time.LocalDate;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.context.annotation.Scope;
@@ -23,12 +25,12 @@ public class Venda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE_TIME)
     private LocalDate data = LocalDate.now();
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "itemVenda_id")
-    private List<ItemVenda> itensVenda;
+    @JoinColumn(name = "item_venda_id")
+    private List<ItemVenda> itensVenda = new ArrayList<>();
 
     public Long getId() {
         return id;

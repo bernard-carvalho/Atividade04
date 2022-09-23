@@ -9,6 +9,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+    <a href="/home"><h1>HOME</h1></a>
+    <a href="/produtos/list"><h1>PRODUTOS</h1></a>
+    <a href="/vendas/list"><h1>VENDAS</h1></a>
+    <a href="/vendas/carrinho/"><h1><p th:text="${'CARRINHO ['+session.venda.getItensVenda.size}+']'"> a</p></h1></a>
+    
     <body>
         <div>DETALHES DA VENDA</div>
         <p th:text="${venda}"> </p>
@@ -25,20 +30,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </tr>
                 <tr>
                     <thead>
-                            <th>Quantidade</th>
-                            <th>Descricao</th>
-                            <th>Valor Unitario</th>
-                            <th>Valor</th>
-                        </thead>
-                        <tbody>
-                            <tr th:each="item :${venda.itensVenda}">
-                                <td><p th:text="${item.getQntd}"></p></td>                
-                                <td><p th:text="${item.produto.getDescricao}"></p></td>    
-                                <td><p th:text="${item.produto.getValor}"></p></td>    
-                                <td><p th:text="${item.total}"></p></td>    
-                            </tr>
-                        </tbody>
-                    
+                        <th>Descricao</th>    
+                        <th>Quantidade</th>
+                        <th>Valor Unitario</th>
+                        <th>Valor Total do Item</th>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item :${venda.itensVenda}">
+                            <td><p th:text="${item.produto.getDescricao}"></p></td>   
+                            <td><p th:text="${item.getQntd}"></p></td>                
+                            <td><p th:text="${item.produto.getValor}"></p></td>    
+                            <td><p th:text="${item.total}"></p></td>    
+                        </tr>
+                    </tbody>                    
                 </tr>
                 <tr>
                     <td> TOTAL </td>

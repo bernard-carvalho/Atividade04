@@ -10,8 +10,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<a href="/home"><h1>home</h1><a/>
-<a href="/produtos/list"><h1>PRODUTOS</h1><a/>
+    <a href="/home"><h1>HOME</h1></a>
+    <a href="/produtos/list"><h1>PRODUTOS</h1></a>
+    <a href="/vendas/list"><h1>VENDAS</h1></a>
+    <a href="/vendas/carrinho/"><h1><p th:text="${'CARRINHO ['+session.venda.getItensVenda.size}+']'"> a</p></h1></a>
     
 <style>
     table td input{
@@ -25,38 +27,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     }
 </style>
 <script>
-    function adicionaProduto(){
-        document.getElementById("form-create").submit();
-    }
-    function alteraProduto(obj){
-        if(obj.innerHTML=="Alterar")
-        {
-            for(input in obj.parentNode.parentNode.querySelectorAll("input"))
-                obj.parentNode.parentNode.querySelectorAll("input")[input].disabled=false;
-            obj.parentNode.parentNode.querySelectorAll("input")[0].disabled=true;
-            obj.innerHTML="Salvar";
-        }
-        else{
-            for(input in obj.parentNode.parentNode.querySelectorAll("input"))
-                obj.parentNode.parentNode.querySelectorAll("input")[input].disabled=true;
-            let id=obj.parentNode.parentNode.querySelectorAll("input")[0];
-            let nome=obj.parentNode.parentNode.querySelectorAll("input")[1];
-            let idade=obj.parentNode.parentNode.querySelectorAll("input")[2];
-            let url = obj.parentNode.parentNode.querySelector("form").getAttribute("action")+"?id="+id.value+"&nome="+nome.value+"&idade="+idade.value;
-            window.location.href = url;
-
-
-
-            obj.innerHTML="Alterar";
-
-        }
-    }
-    function excluirProduto(obj){
-        if(obj.parentNode.parentNode.querySelectorAll("input")[1].disabled)
-            window.location.href = obj.getAttribute("url")+"/"+obj.parentNode.parentNode.querySelectorAll("input")[0].value;
-        else
-            console.log("por favor termine de editar antes de tentar excluir o item");
-    }
+    
 </script>
 
 
@@ -71,12 +42,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </thead>
     <tr th:each="venda : ${vendas}">
 
-        <form method="POST" id="form-delete-update" action="#">
-        <td> <input type="text" th:value="${venda.getId()}" disabled> </td>
-        <td> <input type="text" th:value="${venda.getData()}" disabled></td>
-        <td> <input type="text" th:value="${venda.total()}" disabled> </td>
+        <form method="GET" th:action="'detalhes/'+${venda.getId}">
+        <td> <input type="text" th:value="${venda.getId()}" readonly> </td>
+        <td> <input type="text" th:value="${venda.getData()}" readonly></td>
+        <td> <input type="text" th:value="${venda.total()}" readonly> </td>
+        <td> <input type="submit" id="alterar" value="Detalhar"> </td>
         </form>
-        <td> <button onclick="alteraProduto(this)" id="alterar">Detalhes</button> </td>
+        
 <!--        <td> <button onclick="excluirProduto(this)" id="excluir" url="">Excluir</button></td>-->
 
 
@@ -85,7 +57,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <tr>
         <form method="GET" action="" id="form-create" >
             <td> * </td>
-            <td><input type="text" name="nome"></td>
+            <td><input type="text" name="Data"></td>
             <td><input type="text" name="idade"></td>
             <td colspan="2"><button onclick="adicionaProduto()"> Adicionar </button> </td>
         </form>
