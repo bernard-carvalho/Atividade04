@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <a href="/home"><h1>home</h1><a/>
+    <a href="/vendas/list"><h1>Vendas</h1><a/>
+        <div>PRODUTOS</div>
+        <table class="table" border="1">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descricao</th>
+                <th>Preço</th>
+                <th colspan="2">Ações</th>
+            </tr>
+            </thead>
+            <tr th:each="produto : ${produtos}">
+                <td><input type="text" th:value="${produto.getId()}" disabled></td>
+                <td><input type="text" th:value="${produto.getDescricao()}" disabled></td>
+                <td><input type="text" th:value="${produto.getValor()}" disabled></td>
+                <td></td>
+            </tr>
+            <!-- comment -->
+        </table>
+    </body>
+</html>

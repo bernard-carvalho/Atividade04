@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>DETALHES DA VENDA</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>DETALHES DA VENDA</div>
+        <p th:text="${venda}"> </p>
+        <table border="1px" style="text-align: center;">
+            <thead>
+                <th>ID</th>
+                <th colspan="3">DATA</th>
+            </thead>
+            
+            <tbody>
+                <tr>
+                    <td><p th:text="${venda.getId}"></p></td>
+                    <td colspan="3"><p th:text="${venda.getData}"></p></td>
+                </tr>
+                <tr>
+                    <thead>
+                            <th>Quantidade</th>
+                            <th>Descricao</th>
+                            <th>Valor Unitario</th>
+                            <th>Valor</th>
+                        </thead>
+                        <tbody>
+                            <tr th:each="item :${venda.itensVenda}">
+                                <td><p th:text="${item.getQntd}"></p></td>                
+                                <td><p th:text="${item.produto.getDescricao}"></p></td>    
+                                <td><p th:text="${item.produto.getValor}"></p></td>    
+                                <td><p th:text="${item.total}"></p></td>    
+                            </tr>
+                        </tbody>
+                    
+                </tr>
+                <tr>
+                    <td> TOTAL </td>
+                    <td colspan="3"><p th:text="${venda.total}"></p></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
