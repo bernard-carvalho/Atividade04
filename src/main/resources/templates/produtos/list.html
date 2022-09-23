@@ -26,9 +26,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <td><input type="text" th:value="${produto.getId()}" disabled></td>
                 <td><input type="text" th:value="${produto.getDescricao()}" disabled></td>
                 <td><input type="text" th:value="${produto.getValor()}" disabled></td>
-                <td></td>
+                <td>alterar</td>
+                <td>salvar</td>
             </tr>
-            <!-- comment -->
+            <tr>
+                <form action="/produtos/add" method="get">
+                    <td><input type="number" name="id" disabled></td>
+                    <td><input type="text" name="descricao"></td>
+                    <td><input type="number" name="valor"></td>
+                    <td colspan="2"><input type="submit" value="Adicionar"></td>
+                </form>
+            </tr>
         </table>
     </body>
 </html>

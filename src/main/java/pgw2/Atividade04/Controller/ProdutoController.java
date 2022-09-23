@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.servlet.ModelAndView;
-import pgw2.Atividade04.Repository.ProdutoRepository;
+import org.springframework.web.servlet.view.RedirectView;
 
+import pgw2.Atividade04.Repository.ProdutoRepository;
+import pgw2.Atividade04.Entity.Produto;
 /**
  *
  * @author aluno
@@ -34,5 +36,11 @@ public class ProdutoController {
     public ModelAndView listar(ModelMap model){
         model.addAttribute("produtos", repository.produtos());
         return new ModelAndView("/produtos/list",model);
+    }
+    @GetMapping("/add")
+    public RedirectView save(Produto produto, ModelMap model){
+        repository.save(produto);
+        
+        return new RedirectView("/produtos/list");
     }
 }
