@@ -83,7 +83,12 @@ public class VendaController {
         venda.getItensVenda().add(itemVenda);
         return new RedirectView("/vendas/carrinho/");
     }
-    
+    @GetMapping("/carrinho/finalizar-venda")
+    public RedirectView finalizarVenda(ModelMap model){
+        repository.save(venda);
+        venda = new Venda();
+        return new RedirectView("/vendas/list");  
+    }
     
     
     //add itens
