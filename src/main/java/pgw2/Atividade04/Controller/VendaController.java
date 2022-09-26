@@ -15,6 +15,7 @@ import pgw2.Atividade04.Repository.VendaRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -84,9 +85,9 @@ public class VendaController {
         return new RedirectView("/vendas/carrinho/");
     }
     @GetMapping("/carrinho/finalizar-venda")
-    public RedirectView finalizarVenda(ModelMap model){
+    public RedirectView finalizarVenda(ModelMap model, HttpSession sessao){
         repository.save(venda);
-        venda = new Venda();
+        sessao.invalidate();
         return new RedirectView("/vendas/list");  
     }
     
